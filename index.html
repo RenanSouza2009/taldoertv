@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Taldoer TV+ — Filmes, séries e canais sem limites por R$30/mês</title>
+<title>ELITE TV+ — Filmes, séries e canais sem limites por R$30/mês</title>
 <meta name="description" content="Assista canais ao vivo, filmes, séries, novelas e animes por apenas R$30/mês. Teste grátis de 2 horas. Funciona em Smart TV, celular, notebook, Xbox e Chromecast." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{font-family:'Montserrat',system-ui,sans-serif;color:var(--text);
   background:radial-gradient(ellipse at top,#1d2563 0%,#0d1130 60%,#080a20 100%) fixed;
-  min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
+  min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .container{max-width:1120px;margin:0 auto;padding:0 24px}
@@ -41,9 +41,9 @@ header.nav{display:flex;justify-content:space-between;align-items:center;padding
 @media(min-width:768px){.hero-grid{grid-template-columns:1fr 1fr}}
 .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;border:1px solid rgba(245,197,24,.4);background:rgba(245,197,24,.1);color:var(--yellow);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 .hero h1{margin-top:20px;font-weight:900;letter-spacing:-.02em;line-height:.95}
-.hero h1 .l1{display:block;font-size:clamp(28px,4vw,44px);color:#fff}
-.hero h1 .l2{display:block;font-size:clamp(40px,7vw,72px);color:var(--yellow);margin-top:4px}
-.hero h1 .l3{display:block;font-size:clamp(20px,2.5vw,28px);color:rgba(255,255,255,.9);margin-top:8px}
+.hero h1 .l1{display:block;font-size:clamp(22px,5.5vw,44px);color:#fff}
+.hero h1 .l2{display:block;font-size:clamp(36px,9vw,72px);color:var(--yellow);margin-top:4px}
+.hero h1 .l3{display:block;font-size:clamp(18px,4vw,28px);color:rgba(255,255,255,.9);margin-top:8px}
 .hero p.lead{margin-top:20px;max-width:480px;font-size:17px;color:var(--muted)}
 .hero p.lead b{color:var(--yellow);font-weight:800}
 .cta-row{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
@@ -119,13 +119,43 @@ footer{border-top:1px solid var(--border);background:rgba(0,0,0,.3);padding:48px
 .wa-float:hover{transform:scale(1.1)}
 .wa-float i{font-size:30px}
 @keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}50%{box-shadow:0 0 0 18px rgba(37,211,102,0)}}
+
+/* MOBILE TWEAKS */
+@media(max-width:767px){
+  .container{padding:0 20px}
+  header.nav{flex-direction:column;gap:16px;text-align:center;padding:20px 0 10px}
+  .brand{align-items:center}
+  .brand .sub{margin-left:0}
+  .hero{padding:16px 0 56px;text-align:center}
+  .hero-grid{gap:32px}
+  .hero h1{margin-top:16px}
+  .hero p.lead{margin-left:auto;margin-right:auto}
+  .badge{margin:0 auto}
+  .cta-row{justify-content:center;flex-direction:column;gap:16px}
+  .cta-row .btn-yellow{width:100%;text-align:center}
+  .price-mini{text-align:center}
+  .trust{justify-content:center}
+  .hero-img{max-width:420px;margin:0 auto}
+  .price-section{padding:0 0 56px}
+  .price-left,.price-right{padding:28px 22px;text-align:center}
+  .price-left h2,.price-left .desc,.eyebrow{text-align:center}
+  .services{text-align:left}
+  .features{align-items:center;text-align:left;max-width:320px;margin-left:auto;margin-right:auto}
+  .price-num{justify-content:center}
+  .devices{padding:0 0 56px}
+  .devices-grid{gap:10px}
+  .foot-grid{text-align:center;gap:24px}
+  .foot .row{justify-content:center}
+  .wa-float{bottom:18px;right:18px;width:56px;height:56px}
+  .wa-float i{font-size:26px}
+}
 </style>
 </head>
 <body class="bg-mesh">
 
 <header class="nav container">
   <div class="brand">
-    <div class="brand-row"><i class="icon-tv"></i><span>TALDOER <span class="accent">TV+</span></span></div>
+    <div class="brand-row"><i class="icon-tv"></i><span>ELITE <span class="accent">TV+</span></span></div>
     <span class="sub">Entretenimento sem fronteiras</span>
   </div>
   <a class="btn-yellow" href="https://wa.me/5521980144902" target="_blank" rel="noopener">Assine agora</a>
@@ -142,7 +172,7 @@ footer{border-top:1px solid var(--border);background:rgba(0,0,0,.3);padding:48px
       </h1>
       <p class="lead"><b>Entretenimento sem fronteiras.</b> Todos os streamings em um só lugar, atualizações semanais e os jogos do seu time — por um preço justo.</p>
       <div class="cta-row">
-        <a class="btn-yellow cta-big" href="https://wa.me/5521980144902?text=Olá!%20Quero%20meu%20teste%20grátis%20de%202h%20no%20Taldoer%20TV+" target="_blank" rel="noopener">Quero meu teste grátis →</a>
+        <a class="btn-yellow cta-big" href="https://wa.me/5521980144902?text=Olá!%20Quero%20meu%20teste%20grátis%20de%202h%20no%ELITE%20TV+" target="_blank" rel="noopener">Quero meu teste grátis →</a>
         <div class="price-mini">
           <div class="lbl">Planos a partir de</div>
           <div class="val">R$ 30,00<span>/mês</span></div>
@@ -189,7 +219,7 @@ footer{border-top:1px solid var(--border);background:rgba(0,0,0,.3);padding:48px
         <div class="row"><i class="icon-zap"></i><span>Bônus exclusivo</span></div>
         <p><b>2 horas de teste grátis</b> antes de assinar. Aprovou? É só pagar.</p>
       </div>
-      <a class="btn-dark" href="https://wa.me/5521980144902?text=Olá!%20Quero%20assinar%20o%20Taldoer%20TV+" target="_blank" rel="noopener">Assinar agora →</a>
+      <a class="btn-dark" href="https://wa.me/5521980144902?text=Olá!%20Quero%20assinar%20o%ELITE%20TV+" target="_blank" rel="noopener">Assinar agora →</a>
     </div>
   </div>
 </section>
@@ -210,14 +240,14 @@ footer{border-top:1px solid var(--border);background:rgba(0,0,0,.3);padding:48px
   <div class="container foot">
     <div class="foot-grid">
       <div>
-        <h4>TALDOER <span class="accent">TV+</span></h4>
+        <h4>ELITE <span class="accent">TV+</span></h4>
         <div class="slogan">Entretenimento sem fronteiras</div>
         <p>Filmes, séries e canais sem limites. Teste grátis por 2 horas.</p>
       </div>
       <div>
         <h4>Contato</h4>
         <a href="https://wa.me/5521980144902" target="_blank" rel="noopener"><div class="row"><i class="icon-message-circle"></i><span>(21) 98014-4902</span></div></a>
-        <a href="https://instagram.com/taldoertv" target="_blank" rel="noopener"><div class="row"><i class="icon-instagram"></i><span>@taldoertv</span></div></a>
+        <a href="https://instagram.com/renan_on9" target="_blank" rel="noopener"><div class="row"><i class="icon-instagram"></i><span>@renan_on9</span></div></a>
       </div>
       <div>
         <h4>Atendimento</h4>
@@ -229,7 +259,7 @@ footer{border-top:1px solid var(--border);background:rgba(0,0,0,.3);padding:48px
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/5521980144902?text=Olá!%20Quero%20meu%20teste%20grátis%20de%202h%20no%20Taldoer%20TV+" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">
+<a class="wa-float" href="https://wa.me/5521980144902?text=Olá!%20Quero%20meu%20teste%20grátis%20de%202h%20no%ELITE%20TV+" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">
   <i class="icon-message-circle"></i>
 </a>
 
