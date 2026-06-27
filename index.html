@@ -45,8 +45,14 @@
         async function handleAuth() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const { error } = isLogin ? await supabase.auth.signInWithPassword({email, password}) : await supabase.auth.signUp({email, password});
-            if (error) alert(error.message); else checkUser();
+            if (isLogin) {
+                const { error } = await supabase.auth.signInWithPassword({email, password});
+                if (error) alert(error.message); else checkUser();
+            } else {
+                const { error, data } = await supabase.auth.signUp({email, password});
+                if (error) alert(error.message); 
+                else alert('Conta criada! Verifique seu e-mail para confirmar (ou desative a confirmação no painel do Supabase).');
+            }
         }
 
         async function checkUser() {
