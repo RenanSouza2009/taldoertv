@@ -34,26 +34,36 @@
 
         /* Cards Premium */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--bg-card); backdrop-filter: blur(16px); padding: 30px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; animation: fadeIn 0.5s ease; position: relative; }
-        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.4); }
+        .card { 
+            background: linear-gradient(145deg, #1a1f33, #121829); 
+            backdrop-filter: blur(16px); 
+            padding: 30px; 
+            border-radius: 24px; 
+            border: 1px solid rgba(255,255,255,0.08); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            animation: fadeIn 0.5s ease; 
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--primary); box-shadow: 0 20px 30px rgba(0,0,0,0.5); }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card.verde .badge { background: rgba(34, 197, 94, 0.1); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.2); }
+        .card.amarelo .badge { background: rgba(234, 179, 8, 0.1); color: var(--warning); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .card.vermelho .badge { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); }
         
-        .badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; }
-        .card.verde .badge { background: rgba(34, 197, 94, 0.2); color: var(--success); }
-        .card.amarelo .badge { background: rgba(234, 179, 8, 0.2); color: var(--warning); }
-        .card.vermelho .badge { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .card h3 { margin-bottom: 15px; font-size: 1.5rem; font-weight: 700; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card p { margin-bottom: 8px; color: var(--text-muted); font-size: 0.95rem; }
+        .card strong { color: var(--text-main); font-weight: 600; }
         
-        .card h3 { margin-bottom: 10px; font-size: 1.4rem; font-weight: 700; }
-        .card p { margin-bottom: 6px; color: var(--text-muted); }
-        .card strong { color: var(--text-main); }
-        
-        .actions { display: flex; gap: 12px; margin-top: 25px; }
-        .btn-acao { flex: 1; padding: 12px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        .btn-excluir { background: rgba(239, 68, 68, 0.08); color: var(--danger); }
+        .actions { display: flex; gap: 10px; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .btn-acao { flex: 1; padding: 10px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .btn-excluir { background: rgba(239, 68, 68, 0.05); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.1); }
         .btn-excluir:hover { background: var(--danger); color: white; }
-        .btn-editar { background: rgba(234, 179, 8, 0.08); color: var(--warning); }
+        .btn-editar { background: rgba(234, 179, 8, 0.05); color: var(--warning); border: 1px solid rgba(234, 179, 8, 0.1); }
         .btn-editar:hover { background: var(--warning); color: white; }
+        .btn-lembrete { background: rgba(59, 130, 246, 0.05); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.1); }
+        .btn-lembrete:hover { background: #3b82f6; color: white; }
     </style>
 </head>
 <body>
@@ -67,6 +77,16 @@
             <input type="text" id="dataVenc" placeholder="Data Vencimento (DD/MM/AAAA)" required class="full-width" maxlength="10">
             <button type="submit" id="btnAdicionar">Salvar Cliente</button>
         </form>
+
+        <div style="margin-bottom: 30px; display: flex; justify-content: center;">
+            <select id="sortSelect" onchange="renderizar()" style="background: rgba(18, 24, 41, 0.8); backdrop-filter: blur(16px); color: var(--text-main); padding: 10px 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 14px; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2);">
+                <option value="data-asc">📅 Vencimento: Mais perto → Mais longe</option>
+                <option value="data-desc">📅 Vencimento: Mais longe → Mais perto</option>
+                <option value="nome-asc">🔤 Nome: A → Z</option>
+                <option value="nome-desc">🔤 Nome: Z → A</option>
+            </select>
+        </div>
+
         <div id="gridClientes" class="grid"></div>
     </div>
 
@@ -76,6 +96,7 @@
         const dataInput = document.getElementById('dataVenc');
         const grid = document.getElementById('gridClientes');
         const editIndexInput = document.getElementById('editIndex');
+        const sortSelect = document.getElementById('sortSelect');
         let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
 
         // Máscara de Telefone
@@ -111,8 +132,20 @@
         function renderizar() {
             grid.innerHTML = '';
             const hoje = new Date(); hoje.setHours(0,0,0,0);
+            const sortBy = sortSelect.value;
             
-            clientes.forEach((c, index) => {
+            // Ordena os clientes baseado na seleção
+            const clientesOrdenados = [...clientes].sort((a, b) => {
+                if (sortBy === 'data-asc') return new Date(a.data) - new Date(b.data);
+                if (sortBy === 'data-desc') return new Date(b.data) - new Date(a.data);
+                if (sortBy === 'nome-asc') return a.nome.localeCompare(b.nome);
+                if (sortBy === 'nome-desc') return b.nome.localeCompare(a.nome);
+                return 0;
+            });
+            
+            clientesOrdenados.forEach((c) => {
+                // Encontra o índice original para permitir edição/exclusão correta
+                const originalIndex = clientes.indexOf(c);
                 const dataVenc = new Date(c.data + 'T00:00:00');
                 const diffDays = Math.ceil((dataVenc - hoje) / (1000 * 60 * 60 * 24));
                 
@@ -127,8 +160,9 @@
                     <p>📱 WhatsApp: <strong>${c.whats}</strong></p>
                     <p>📅 Vencimento: <strong>${isoToBr(c.data)}</strong></p>
                     <div class="actions">
-                        <button class="btn-acao btn-editar" onclick="editar(${index})">Editar</button>
-                        <button class="btn-acao btn-excluir" onclick="excluir(${index})">Excluir</button>
+                        <button class="btn-acao btn-editar" onclick="editar(${originalIndex})">Editar</button>
+                        <button class="btn-acao btn-excluir" onclick="excluir(${originalIndex})">Excluir</button>
+                        <button class="btn-acao btn-lembrete" onclick="enviarLembrete('${c.whats.replace(/\D/g, '')}', '${c.nome}', '${c.usuario}', '${isoToBr(c.data)}')">Lembrete</button>
                     </div>
                 </div>`;
             });
@@ -159,6 +193,15 @@
         function excluir(index) { 
             if(confirm('Tem certeza?')) { clientes.splice(index, 1); localStorage.setItem('clientes', JSON.stringify(clientes)); renderizar(); }
         }
+
+        function enviarLembrete(whats, nome, usuario, data) {
+            const numLimpo = whats.replace(/\D/g, '');
+            const texto = `Olá querido(a) cliente ${nome},\n\nSua conta expira em breve,\nSeu plano de R$ 30,00 vence em: ${data},\nseu usuario atual é ${usuario},\nEvite o bloqueio automatico do seu sinal`;
+
+            const msg = encodeURIComponent(texto);
+            window.open(`https://wa.me/55${numLimpo}?text=${msg}`, '_blank');
+        }
+
         renderizar();
     </script>
 </body>
